@@ -1,0 +1,25 @@
+resources:
+  jobs:
+    table_refresh_job:
+      name: table_refresh_job
+
+      libraries:
+        - notebook: 
+            path: ../src/define_tables.ipynb
+
+      # Set up refresh schedule
+      trigger:
+        periodic:
+          interval: 1
+          unit: HOURS
+
+      email_notifications:
+        on_failure:
+          - chandler.brooks@databricks.com
+          
+      # Define pipeline task to refresh pipeline, dynamically assign pipeline ID    
+      tasks:
+        - task_key: refresh_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.demo_dlt_pipeline.id}
+        

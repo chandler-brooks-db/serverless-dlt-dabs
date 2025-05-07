@@ -1,0 +1,17 @@
+resources:
+  pipelines:
+    demo_dlt_pipeline:
+      name: DLT_Pipeline_Demo
+      catalog: cb_demos
+      schema: dlt
+      serverless: true
+      photon: true
+      development: true
+      event_log:
+        catalog: cb_demos
+        schema: dlt
+        name: DLT_Pipeline_Demo_event_log
+      libraries:
+        - notebook: 
+            path: ../src/define_tables.ipynb
+      
